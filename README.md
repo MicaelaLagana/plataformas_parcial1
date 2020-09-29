@@ -1,2 +1,2 @@
-# plataformas_parcial1
-Primer parcial escuela multimedial davinci
+# Primer Parcial Plataformas de desarrollo
+primer parcial.
