@@ -8,7 +8,7 @@ namespace primerparcial
         {
             Console.WriteLine("Hello World!");
 
-            var ctx = new TareasDB();
+            var ctx = new ParcialDBContext();
 
             ctx.Set<Usuario>().Add(new Usuario
             {

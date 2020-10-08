@@ -1,0 +1,54 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace primerparcial
+{
+    class ParcialDBContext : DbContext
+    {
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=tareas.db");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Usuario>()
+            .ToTable("Usuario")
+            .Property(p => p.Clave).HasMaxLength(10).IsRequired();
+            modelBuilder.Entity<Usuario>()
+            .Property(p => p.User).HasMaxLength(10).IsRequired();
+            modelBuilder.Entity<Usuario>()
+            .Property(p => p.Id).ValueGeneratedOnAdd().IsRequired();
+
+            modelBuilder.Entity<Tarea>()
+            .ToTable("Tarea")
+            .Property(p => p.Id).ValueGeneratedOnAdd().IsRequired();
+            modelBuilder.Entity<Tarea>()
+           .Property(p => p.Titulo).HasMaxLength(30).IsRequired();
+            modelBuilder.Entity<Tarea>()
+           .Property(p => p.Vencimiento);
+            modelBuilder.Entity<Tarea>()
+           .Property(p => p.Estimacion);
+            modelBuilder.Entity<Tarea>()
+           .Property(p => p.Estado).HasDefaultValue(false).IsRequired();
+
+
+            modelBuilder.Entity<Recurso>()
+            .ToTable("Recurso")
+            .Property(p => p.Id).ValueGeneratedOnAdd().IsRequired();
+            modelBuilder.Entity<Recurso>()
+           .Property(p => p.Nombre).HasMaxLength(30).IsRequired();
+
+            modelBuilder.Entity<Detalle>()
+            .ToTable("Detalle")
+            .Property(p => p.Id).ValueGeneratedOnAdd().IsRequired();
+            modelBuilder.Entity<Detalle>()
+            .Property(p => p.Fecha).HasDefaultValue(DateTime.UtcNow).IsRequired();
+            modelBuilder.Entity<Detalle>()
+            .Property(p => p.Tiempo).HasMaxLength(30).IsRequired();
+
+        }
+    }
+}
